@@ -1,0 +1,60 @@
+# Virtual Environment
+venv/
+.env/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code
+.vscode/
+
+# JetBrains IDE
+.idea/
+
+# Environment Variables
+.env
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Audio Files
+*.wav
+*.mp3
+
+# Build Files
+build/
+dist/
+*.egg-info/
+
+# Python Testing
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Coverage Reports
+htmlcov/
+.coverage
+
+# Temporary Files
+temp/
+tmp/
+
+# Orders/Data Backup
+*.bak
+
+# SQLite Database
+*.sqlite3
+
+# Mac/Linux hidden files
+.*~
+
+# Node Modules (if frontend added later)
+node_modules/
