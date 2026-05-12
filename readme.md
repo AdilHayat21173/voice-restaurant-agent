@@ -1,4 +1,4 @@
-# Voice Restaurant Agent 🍽️🎙️
+# Voice Restaurant Agent 
 
 A real-time AI Voice Assistant for restaurant ordering using the Gemini Live API, Python, and WebSocket-based streaming audio communication.
 
@@ -14,7 +14,7 @@ This project allows users to:
 
 ---
 
-# Features 🚀
+# Features 
 
 ✅ Real-time voice conversation  
 ✅ Gemini Live API integration  
@@ -30,7 +30,7 @@ This project allows users to:
 
 ---
 
-# Project Structure 📂
+# Project Structure 
 
 ```bash
 VoiceAgent/
@@ -65,7 +65,7 @@ VoiceAgent/
 
 ---
 
-# How It Works ⚙️
+# How It Works 
 
 ## 1. User Speaks
 
@@ -108,7 +108,7 @@ Gemini generates a natural voice response back to the user.
 
 ---
 
-# Tech Stack 🛠️
+# Tech Stack 
 
 - Python
 - Gemini Live API
@@ -119,7 +119,7 @@ Gemini generates a natural voice response back to the user.
 
 ---
 
-# Installation 🔧
+# Installation 
 
 ## 1. Clone Repository
 
@@ -156,7 +156,7 @@ pip install -r requirements.txt
 
 ---
 
-# Environment Variables 🔑
+# Environment Variables 
 
 Create a `.env` file:
 
@@ -170,7 +170,7 @@ https://aistudio.google.com
 
 ---
 
-# Run Project ▶️
+# Run Project 
 
 ```bash
 python main.py
@@ -178,7 +178,7 @@ python main.py
 
 ---
 
-# Example Conversation 💬
+# Example Conversation 
 
 ## Place Order
 
@@ -228,7 +228,7 @@ python main.py
 
 ---
 
-# Important Fixes Included ✅
+# Important Fixes Included 
 
 ## Real-Time Continuous Audio Streaming
 
@@ -274,7 +274,7 @@ Project now works correctly from any directory.
 
 ---
 
-# Requirements 📦
+# Requirements 
 
 ```txt
 google-genai
@@ -285,7 +285,7 @@ numpy
 
 ---
 
-# Future Improvements 🚀
+# Future Improvements 
 
 - Database integration
 - FastAPI backend
@@ -298,7 +298,7 @@ numpy
 
 ---
 
-# Author 👨‍💻
+# Author 
 
 Adil Hayat
 
