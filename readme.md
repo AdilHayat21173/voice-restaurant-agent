@@ -1,6 +1,9 @@
-# Voice Restaurant Agent 
+# Voice Restaurant Agent 🍽️🎙️
 
-A real-time AI Voice Assistant for restaurant ordering using the Gemini Live API, Python, and WebSocket-based streaming audio communication.
+A real-time AI Voice Assistant for restaurant ordering using the Gemini Live API, Python, and WebSocket-based real-time audio communication.
+
+## Demo Video
+https://reccloud.com/u/z07xbiu
 
 This project allows users to:
 
