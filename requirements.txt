@@ -1,3 +1,9 @@
+fastapi
+uvicorn[standard]
+websockets
 google-genai
-pyaudio
 python-dotenv
+numpy
+soundfile
+pydub
+pyaudio

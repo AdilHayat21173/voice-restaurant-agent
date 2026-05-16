@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hujra Restaurant AI Assistant</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: white;
+    }
+
+    /* ── Hero Page ────────────────────────────────────────────── */
+    .hero-page {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url("https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1974&auto=format&fit=crop");
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* ── Navbar ───────────────────────────────────────────────── */
+    .navbar {
+      width: 100%;
+      height: 85px;
+      padding: 0 55px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      color: white;
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      color: #f2f2f2;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover { color: #75c98f; }
+
+    .nav-btn {
+      background: #4f9566;
+      color: white !important;
+      padding: 14px 22px;
+      border-radius: 8px;
+      font-weight: 700 !important;
+    }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 80px;
+    }
+
+    .arabic {
+      font-size: 58px;
+      margin-bottom: 8px;
+      text-shadow: 0 5px 18px rgba(0,0,0,0.7);
+    }
+
+    .hero h1 {
+      font-size: 76px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.75);
+    }
+
+    .hero h2 {
+      font-size: 50px;
+      margin-top: 12px;
+      margin-bottom: 30px;
+      font-weight: 800;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.75);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      border: none;
+      padding: 16px 28px;
+      border-radius: 9px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+    .menu-btn  { background: #d89436; }
+    .talk-btn  { background: #4f9566; }
+
+    /* ── Voice Card ───────────────────────────────────────────── */
+    .voice-card {
+      position: absolute;
+      right: 55px;
+      bottom: 45px;
+      width: 230px;
+      padding: 20px;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .speak-btn {
+      background: #4f9566;
+      color: white;
+      border: none;
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: 0.3s;
+      width: 100%;
+    }
+
+    .speak-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .speak-btn.listening {
+      background: #d63f3f;
+      animation: pulse 1s infinite;
+    }
+
+    .voice-card p {
+      font-size: 15px;
+      color: #f1f1f1;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #facc15;
+    }
+
+    /* ── Sections ─────────────────────────────────────────────── */
+    section.content-section {
+      min-height: 100vh;
+      scroll-margin-top: 85px;
+      padding: 110px 8% 85px;
+      background: linear-gradient(135deg, #111827, #1f2937);
+      color: white;
+    }
+
+    section.content-section:nth-child(even) {
+      background: linear-gradient(135deg, #0f172a, #111827);
+    }
+
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 18px;
+      color: white;
+      text-align: center;
+    }
+
+    .section-text {
+      max-width: 850px;
+      margin: 0 auto 35px;
+      text-align: center;
+      line-height: 1.7;
+      color: #d1d5db;
+      font-size: 17px;
+    }
+
+    /* ── Menu Grid ────────────────────────────────────────────── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .menu-card {
+      background: rgba(255,255,255,0.08);
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .menu-card h3 {
+      color: #4f9566;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .menu-card p  { color: #d1d5db; line-height: 1.6; }
+
+    /* ── Contact ──────────────────────────────────────────────── */
+    .contact-box {
+      max-width: 850px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,0.08);
+      padding: 24px;
+      border-radius: 14px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    .contact-item h3 {
+      color: #d89436;
+      margin-bottom: 8px;
+    }
+
+    /* ── Animations ───────────────────────────────────────────── */
+    @keyframes pulse {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    /* ── Mobile ───────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .navbar { padding: 0 22px; }
+      .logo   { font-size: 26px; }
+      .nav-links { gap: 12px; }
+      .nav-links a:not(.nav-btn) { display: none; }
+      .hero h1  { font-size: 44px; }
+      .hero h2  { font-size: 34px; }
+      .arabic   { font-size: 40px; }
+      .voice-card {
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        bottom: 25px;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- ═══════════════════════════ HERO ═════════════════════════ -->
+  <div class="hero-page" id="home">
+
+    <nav class="navbar">
+      <div class="logo">HUJRA</div>
+      <div class="nav-links">
+        <a href="#top">Home</a>
+        <a href="javascript:void(0)" onclick="goToSection('menu')">Menu</a>
+        <a href="javascript:void(0)" onclick="goToSection('about')">About</a>
+        <a href="javascript:void(0)" onclick="goToSection('contact')">Contact</a>
+        <a href="#" class="nav-btn" onclick="toggleVoice(); return false;">Talk to AI Assistant</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="arabic">الحجره</div>
+      <h1>HUJRA RESTAURANT</h1>
+      <h2>Swat</h2>
+
+      <div class="hero-buttons">
+        <a href="#menu" class="btn menu-btn">View Menu</a>
+        <button class="btn talk-btn" onclick="toggleVoice()">Talk to Hujra AI</button>
+      </div>
+
+      <div class="voice-card">
+        <button id="speakBtn" class="speak-btn" onclick="toggleVoice()">Speak</button>
+        <p>Real-Time Voice Assistant</p>
+        <div id="status" class="status">Disconnected</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ══════════════════════════ MENU ══════════════════════════ -->
+  <section class="content-section" id="menu">
+    <h2 class="section-title">Hujra Restaurant Popular Dishes</h2>
+    <p class="section-text">Explore the most popular traditional dishes available at Hujra Restaurant Swat.</p>
+
+    <div class="menu-grid">
+      <div class="menu-card">
+        <h3>Mutton Shinwari Karahi</h3>
+        <p>Full KG Traditional Shinwari Karahi</p>
+        <strong>Rs. 3,500 – 4,500</strong>
+      </div>
+      <div class="menu-card">
+        <h3>Authentic Afghani Pulao</h3>
+        <p>Traditional Afghani rice with rich flavor</p>
+        <strong>Rs. 500 – 980</strong>
+      </div>
+      <div class="menu-card">
+        <h3>Chicken Jalfrezi Handi</h3>
+        <p>Spicy chicken handi with special sauce</p>
+        <strong>Rs. 1,900</strong>
+      </div>
+      <div class="menu-card">
+        <h3>Hujra Hot &amp; Sour Soup</h3>
+        <p>Special traditional restaurant soup</p>
+        <strong>Rs. 450</strong>
+      </div>
+      <div class="menu-card">
+        <h3>Peshawari Kehwa</h3>
+        <p>Traditional green tea served hot</p>
+        <strong>Rs. 185</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ ABOUT ═════════════════════════ -->
+  <section class="content-section" id="about">
+    <h2 class="section-title">Welcome to Hujra Restaurant Swat</h2>
+    <p class="section-text">
+      Experience authentic Pashtun hospitality along the scenic banks of the Swat River.
+      Hujra Restaurant blends traditional culture with a modern fine-dining experience,
+      offering private family seating, outdoor riverside dining, and traditional floor seating layouts.
+    </p>
+
+    <div class="contact-box">
+      <div class="contact-item">
+        <h3>📍 Address</h3>
+        <p>Bypass Road, Mingora, Swat, Khyber Pakhtunkhwa, Pakistan</p>
+      </div>
+      <div class="contact-item">
+        <h3>⏰ Timings</h3>
+        <p>11:30 AM to 11:55 PM<br>Open Daily</p>
+      </div>
+      <div class="contact-item">
+        <h3>🍲 Specialties</h3>
+        <p>Mutton Shinwari Karahi, BBQ Platters, Afghani Pulao &amp; Hujra Special Soup</p>
+      </div>
+      <div class="contact-item">
+        <h3>🚗 Amenities</h3>
+        <p>Free Parking, Family Cabins, Prayer Space &amp; Wheelchair Access</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════════════════ CONTACT ════════════════════════ -->
+  <section class="content-section" id="contact">
+    <h2 class="section-title">Contact Hujra Restaurant Swat</h2>
+    <p class="section-text">
+      For table reservations, catering queries, or group bookings, feel free to contact us.
+    </p>
+
+    <div class="contact-box">
+      <div class="contact-item">
+        <h3>📍 Address</h3>
+        <p>Bypass Road, Mingora, Swat, Khyber Pakhtunkhwa, Pakistan</p>
+      </div>
+      <div class="contact-item">
+        <h3>📞 Phone Numbers</h3>
+        <p>+92 315 8223333<br>(0946) 812123</p>
+      </div>
+      <div class="contact-item">
+        <h3>⏰ Operating Hours</h3>
+        <p>Every day from 11:30 AM to 11:55 PM</p>
+      </div>
+      <div class="contact-item">
+        <h3>🌐 Facebook</h3>
+        <p>Official Hujra Restaurant Swat Page</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════ VOICE SCRIPT ═════════════════════ -->
+  <script>
+  // ─── Helpers ───────────────────────────────────────────────────────────────
+  function goToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // ─── State ─────────────────────────────────────────────────────────────────
+  const speakBtn   = document.getElementById("speakBtn");
+  const statusText = document.getElementById("status");
+
+  let websocket    = null;
+  let audioContext = null;   // for microphone capture (16 kHz)
+  let processor    = null;
+  let micStream    = null;
+  let isConnected  = false;
+
+  // Playback state — persists across turns (not recreated on turn_complete)
+  let playbackCtx  = null;
+  let nextPlayTime = 0;
+
+  // ─── Playback context (24 kHz) ─────────────────────────────────────────────
+  function ensurePlaybackContext() {
+    if (!playbackCtx || playbackCtx.state === "closed") {
+      playbackCtx  = new AudioContext({ sampleRate: 24000 });
+      nextPlayTime = 0;
+    }
+    if (playbackCtx.state === "suspended") {
+      playbackCtx.resume();
+    }
+    return playbackCtx;
+  }
+
+  // ─── Toggle ────────────────────────────────────────────────────────────────
+  function toggleVoice() {
+    if (isConnected) {
+      stopVoice();
+    } else {
+      startVoice();
+    }
+  }
+
+  // ─── Start ─────────────────────────────────────────────────────────────────
+  async function startVoice() {
+    statusText.innerText = "Connecting…";
+    speakBtn.disabled    = true;
+
+    websocket            = new WebSocket("ws://127.0.0.1:8000/ws/voice");
+    websocket.binaryType = "arraybuffer";
+
+    // ── onopen ────────────────────────────────────────────────────────────────
+    websocket.onopen = async () => {
+      isConnected           = true;
+      speakBtn.disabled     = false;
+      speakBtn.classList.add("listening");
+      speakBtn.innerText    = "Stop";
+      statusText.innerText  = "Connected — Listening";
+
+      // Pre-warm playback context (needs user gesture — we have it here)
+      ensurePlaybackContext();
+
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl:  true,
+          },
+        });
+
+        audioContext = new AudioContext({ sampleRate: 16000 });
+        const source = audioContext.createMediaStreamSource(micStream);
+
+        // ScriptProcessor is deprecated but universally supported; for
+        // production swap to an AudioWorklet.
+        processor = audioContext.createScriptProcessor(4096, 1, 1);
+
+        // Silent output node — prevents feedback loop
+        const silentGain       = audioContext.createGain();
+        silentGain.gain.value  = 0;
+
+        source.connect(processor);
+        processor.connect(silentGain);
+        silentGain.connect(audioContext.destination);
+
+        processor.onaudioprocess = (event) => {
+          if (!websocket || websocket.readyState !== WebSocket.OPEN) return;
+
+          const inputData = event.inputBuffer.getChannelData(0);
+          websocket.send(float32ToInt16(inputData));
+        };
+
+      } catch (err) {
+        console.error("Microphone error:", err);
+        statusText.innerText = "Mic access denied";
+        stopVoice();
+      }
+    };
+
+    // ── onmessage ─────────────────────────────────────────────────────────────
+    websocket.onmessage = (event) => {
+      // Text signal from server
+      if (typeof event.data === "string") {
+        if (event.data === "__TURN_COMPLETE__") {
+          // ── KEY FIX ──────────────────────────────────────────────────────
+          // Reset nextPlayTime so the next answer starts immediately,
+          // but DO NOT close the WebSocket or call stopVoice().
+          // The connection stays open and the mic keeps streaming.
+          // ─────────────────────────────────────────────────────────────────
+          nextPlayTime         = 0;
+          statusText.innerText = "Connected — Listening";
+          console.log("[WS] Turn complete — still connected, awaiting next question.");
+        }
+        return;
+      }
+
+      // Binary — audio chunk from Gemini
+      playAudioChunk(event.data);
+    };
+
+    // ── onclose ───────────────────────────────────────────────────────────────
+    websocket.onclose = (evt) => {
+      console.log("[WS] Closed:", evt.code, evt.reason);
+      cleanupVoice();
+      statusText.innerText = "Disconnected";
+    };
+
+    // ── onerror ───────────────────────────────────────────────────────────────
+    websocket.onerror = (err) => {
+      console.error("[WS] Error:", err);
+      cleanupVoice();
+      statusText.innerText = "Connection Error — Is the server running?";
+    };
+  }
+
+  // ─── Stop (user-initiated) ─────────────────────────────────────────────────
+  function stopVoice() {
+    if (websocket && websocket.readyState === WebSocket.OPEN) {
+      websocket.close(1000, "User stopped");
+    }
+    cleanupVoice();
+  }
+
+  // ─── Cleanup ───────────────────────────────────────────────────────────────
+  function cleanupVoice() {
+    isConnected = false;
+    speakBtn.disabled = false;
+    speakBtn.classList.remove("listening");
+    speakBtn.innerText = "Speak";
+
+    if (processor) {
+      processor.disconnect();
+      processor = null;
+    }
+
+    if (audioContext) {
+      audioContext.close();
+      audioContext = null;
+    }
+
+    if (micStream) {
+      micStream.getTracks().forEach(track => track.stop());
+      micStream = null;
+    }
+
+    // Close playback context so it's recreated fresh next session
+    if (playbackCtx && playbackCtx.state !== "closed") {
+      playbackCtx.close();
+      playbackCtx  = null;
+      nextPlayTime = 0;
+    }
+
+    websocket = null;
+  }
+
+  // ─── PCM conversion ────────────────────────────────────────────────────────
+  function float32ToInt16(buffer) {
+    const out = new Int16Array(buffer.length);
+    for (let i = 0; i < buffer.length; i++) {
+      const s = Math.max(-1, Math.min(1, buffer[i]));
+      out[i]  = s < 0 ? s * 0x8000 : s * 0x7fff;
+    }
+    return out.buffer;
+  }
+
+  // ─── Audio playback ────────────────────────────────────────────────────────
+  function playAudioChunk(rawBuffer) {
+    const ctx      = ensurePlaybackContext();
+    const int16    = new Int16Array(rawBuffer);
+    const float32  = new Float32Array(int16.length);
+
+    for (let i = 0; i < int16.length; i++) {
+      float32[i] = int16[i] / 32768;
+    }
+
+    const audioBuf = ctx.createBuffer(1, float32.length, 24000);
+    audioBuf.copyToChannel(float32, 0);
+
+    const source  = ctx.createBufferSource();
+    source.buffer = audioBuf;
+    source.connect(ctx.destination);
+
+    const startAt = Math.max(ctx.currentTime, nextPlayTime);
+    source.start(startAt);
+    nextPlayTime = startAt + audioBuf.duration;
+  }
+  </script>
+
+</body>
+</html>
