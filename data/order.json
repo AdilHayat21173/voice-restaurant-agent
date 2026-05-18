@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "order_id": "A1",
+    "customer_name": "Adil Hayat",
+    "phone": "03001234567",
+    "address": "Mingora, Swat",
+    "items": [
+      {
+        "name": "Chicken Karahi",
+        "qty": 1
+      },
+      {
+        "name": "Naan",
+        "qty": 2
+      },
+      {
+        "name": "Cold Drink",
+        "qty": 2
+      }
+    ],
+    "total_price": 2140,
+    "status": "active"
+  }
+]

@@ -1,45 +1,60 @@
-# Voice Restaurant Agent 🍽️🎙️
+# Hujra Restaurant AI Voice Agent
 
-A real-time AI Voice Assistant for restaurant ordering using the Gemini Live API, Python, and WebSocket-based real-time audio communication.
+An AI-powered real-time voice restaurant assistant built using **Gemini Live API**, **FastAPI**, **WebSockets**, and a modern frontend website.
 
-## Demo Video
+The assistant allows users to talk naturally with an AI restaurant agent for:
+
+- Food ordering
+- Menu inquiries
+- Order updates
+- Order cancellation
+- Real-time AI voice conversation
+
+---
+
+# Frontend Preview
+
+![Hujra Restaurant Frontend](assets/frontend.png)
+---
+
+# Demo Video
+
 https://reccloud.com/u/z07xbiu
 
-This project allows users to:
+---
 
-- Talk naturally with an AI restaurant assistant
+# Features
+
+- Real-time AI voice conversation
+- Gemini Live API integration
+- FastAPI backend with WebSocket support
+- Real-time microphone audio streaming
+- AI-generated voice responses
+- Restaurant menu assistant
 - Place food orders using voice
-- Update existing orders
+- Modify existing orders
 - Cancel orders
 - Check order status
-- Stream real-time microphone audio to Gemini Live
-- Receive AI-generated voice responses instantly
+- Modern responsive frontend website
+- Tool-based AI architecture
+- Continuous multi-turn conversation support
+- Conversation memory handling
+- Detailed debug logging & error handling
 
 ---
 
-# Features 
-
-✅ Real-time voice conversation  
-✅ Gemini Live API integration  
-✅ WebSocket-based audio streaming  
-✅ Restaurant menu support  
-✅ Place orders with AI  
-✅ Update existing orders  
-✅ Cancel orders  
-✅ Check order status  
-✅ Voice Activity Detection (VAD)  
-✅ Modular project structure  
-✅ Tool-based AI architecture  
-
----
-
-# Project Structure 
+# Project Structure
 
 ```bash
 VoiceAgent/
 │
+├── API/
+│   └── voice_api.py
+│
 ├── agents/
-│   └── gemini_client.py
+│   ├── gemini_client.py
+│   ├── prompts.py
+│   └── tool_handler.py
 │
 ├── audio/
 │   ├── input.py
@@ -49,10 +64,18 @@ VoiceAgent/
 │   ├── menu.json
 │   └── orders.json
 │
+├── frontend/
+│   ├── index.html
+│   ├── script.js
+│   ├── style.css
+│   └── assets/
+│       └── frontend-preview.png
+│
 ├── tools/
+│   ├── get_menu.py
 │   ├── place_order.py
-│   ├── cancel_order.py
 │   ├── update_order.py
+│   ├── cancel_order.py
 │   └── order_status.py
 │
 ├── utils/
@@ -60,7 +83,6 @@ VoiceAgent/
 │   └── file_handler.py
 │
 ├── config.py
-├── main.py
 ├── requirements.txt
 ├── .env
 └── README.md
@@ -68,27 +90,29 @@ VoiceAgent/
 
 ---
 
-# How It Works 
+# How It Works
 
 ## 1. User Speaks
 
-The microphone captures live audio from the user.
+The user speaks through the browser microphone.
 
 ---
 
-## 2. Audio Streaming
+## 2. Real-Time Audio Streaming
 
-Audio is streamed continuously to Gemini Live using real-time WebSocket communication.
+Audio is streamed continuously from the frontend to the FastAPI backend using WebSockets.
 
 ---
 
-## 3. Gemini AI Processes Request
+## 3. Gemini Live API Processing
 
-The AI understands the user's intent:
+Gemini Live API processes the audio in real-time and understands the user intent.
 
-- Place order
-- Cancel order
+Examples:
+
+- Place food order
 - Update order
+- Cancel order
 - Ask menu questions
 - Check order status
 
@@ -96,38 +120,79 @@ The AI understands the user's intent:
 
 ## 4. Tool Execution
 
-Based on the request, the appropriate tool is executed:
+The AI automatically calls tools based on the user request.
 
+Available tools:
+
+- `get_menu.py`
 - `place_order.py`
-- `cancel_order.py`
 - `update_order.py`
+- `cancel_order.py`
 - `order_status.py`
 
 ---
 
-## 5. AI Responds with Voice
+## 5. AI Voice Response
 
-Gemini generates a natural voice response back to the user.
+Gemini generates a natural real-time voice response and streams it back to the browser.
 
 ---
 
-# Tech Stack 
+# Frontend Website
+
+The project now includes a complete frontend website with:
+
+- Restaurant landing page
+- AI voice assistant button
+- Real-time voice interaction
+- WebSocket integration
+- Responsive UI design
+
+---
+
+# WebSocket Endpoint
+
+```bash
+ws://127.0.0.1:8000/ws/voice
+```
+
+---
+
+# Tech Stack
+
+## Backend
 
 - Python
-- Gemini Live API
+- FastAPI
 - WebSockets
-- PyAudio
 - AsyncIO
-- JSON Storage
+- Uvicorn
+
+## AI / Voice
+
+- Gemini Live API
+- Google GenAI SDK
+- Real-time audio streaming
+
+## Frontend
+
+- HTML
+- CSS
+- JavaScript
+
+## Storage
+
+- JSON-based storage
 
 ---
 
-# Installation 
+# Installation
 
 ## 1. Clone Repository
 
 ```bash
 git clone https://github.com/your-username/voice-restaurant-agent.git
+
 cd voice-restaurant-agent
 ```
 
@@ -139,6 +204,7 @@ cd voice-restaurant-agent
 
 ```bash
 python -m venv venv
+
 venv\Scripts\activate
 ```
 
@@ -146,6 +212,7 @@ venv\Scripts\activate
 
 ```bash
 python3 -m venv venv
+
 source venv/bin/activate
 ```
 
@@ -159,7 +226,7 @@ pip install -r requirements.txt
 
 ---
 
-# Environment Variables 
+# Environment Variables
 
 Create a `.env` file:
 
@@ -173,84 +240,125 @@ https://aistudio.google.com
 
 ---
 
-# Run Project 
+# Run Backend Server
 
 ```bash
-python main.py
+uvicorn API.voice_api:app --host 127.0.0.1 --port 8000
 ```
 
 ---
 
-# Example Conversation 
+# Run Frontend
+
+Open:
+
+```bash
+frontend/index.html
+```
+
+Or use Live Server in VS Code.
+
+---
+
+# Example Conversation
 
 ## Place Order
 
-**User:**
+### User
 
 > I want one chicken karahi and two naan.
 
-**AI:**
+### AI
 
-> Your order has been placed successfully. Your order ID is A1.
+> Sure! One Chicken Karahi and two Naan added to your order.
 
 ---
 
 ## Update Order
 
-**User:**
+### User
 
-> Add one more naan to order A1.
+> Add one cold drink.
 
-**AI:**
+### AI
 
-> Your order has been updated successfully.
+> Done. One Cold Drink added to your order.
+
+---
+
+## Check Bill
+
+### User
+
+> What is my total bill?
+
+### AI
+
+> Your current total bill is Rs. 2020.
 
 ---
 
 ## Cancel Order
 
-**User:**
+### User
 
-> Cancel my order A1.
+> Cancel my order.
 
-**AI:**
+### AI
 
 > Your order has been cancelled successfully.
 
 ---
 
-## Check Status
+# Conversation Features
 
-**User:**
+The assistant supports:
 
-> What is the status of order A1?
-
-**AI:**
-
-> Your order is currently being prepared.
+- Continuous conversation
+- Multi-turn interaction
+- Natural speech responses
+- Context-aware conversation
+- Real-time streaming audio
+- AI tool calling
 
 ---
 
-# Important Fixes Included 
+# Debugging & Logging
 
-## Real-Time Continuous Audio Streaming
+The backend includes detailed logs for:
+
+- WebSocket connections
+- Audio streaming
+- Gemini responses
+- Tool execution
+- Turn completion
+- Error tracebacks
+- Session debugging
+
+---
+
+# Important Improvements
+
+## Continuous Real-Time Streaming
 
 Previously:
 
-- Audio chunks were manually filtered
-- Second user question was often ignored
+- Sessions restarted frequently
+- Conversation memory was lost
+- Second question sometimes failed
 
 Now:
 
-- Continuous audio streaming
-- Gemini handles turn detection automatically
-- Stable multi-turn conversation support
+- Stable WebSocket streaming
+- Better session handling
+- Improved conversation continuity
+- Better debugging support
 
 ---
 
-## Better Menu Matching
+## Improved Menu Matching
 
-Improved food matching:
+Examples:
 
 ```text
 mutton karahi → Mutton Karahi
@@ -259,7 +367,7 @@ chicken handi → Chicken Handi
 
 ---
 
-## Improved Order ID Validation
+## Better Order Validation
 
 Supports:
 
@@ -271,16 +379,24 @@ a-1
 
 ---
 
-## Fixed File Paths
+## Frontend + Backend Integration
 
-Project now works correctly from any directory.
+The project now includes:
+
+- Complete frontend website
+- FastAPI backend API
+- Real-time voice endpoint
+- Browser microphone integration
 
 ---
 
-# Requirements 
+# Requirements
 
 ```txt
+fastapi
+uvicorn
 google-genai
+websockets
 pyaudio
 python-dotenv
 numpy
@@ -288,24 +404,31 @@ numpy
 
 ---
 
-# Future Improvements 
+# Future Improvements
 
 - Database integration
-- FastAPI backend
-- React frontend
-- Multi-language support
-- Order payment integration
+- User authentication
 - Admin dashboard
-- Speech-to-text optimization
+- React frontend
 - Docker deployment
+- Multi-language support
+- Table reservation system
+- Online payments
+- WhatsApp ordering
+- Cloud deployment
 
 ---
 
-# Author 
+# Author
 
-Adil Hayat
+## Adil Hayat
 
 - AI Engineer
 - Generative AI Developer
 - Voice AI & Agentic Systems Builder
 
+---
+
+# Project Goal
+
+To build a real-time AI-powered restaurant assistant capable of handling natural voice conversations, restaurant operations, and real-time order management using modern AI technologies.
