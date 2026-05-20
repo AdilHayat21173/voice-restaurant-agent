@@ -19,8 +19,7 @@ The assistant allows users to talk naturally with an AI restaurant agent for:
 
 # Demo Video
 
-![Hujra Restaurant Demo Video](D:\Education\Machine Learning\VoiceAgent\assets\Hujra Resturent video.mp4)
-
+[Watch Demo Video](assets/Hujra_Resturent_video.mp4)
 ---
 
 # Features
